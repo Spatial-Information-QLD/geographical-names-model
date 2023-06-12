@@ -1,12 +1,13 @@
 == Templating
 
-To present - on screen or in print form - the consolidated label for a Road, the Feature Label Components of a Road Label need to be assembled in a particular order and perhaps processes to make contractions etc. The logic for this is not contained in the Classes or Properties of the model but in this Templating section.
+
+To present - on screen or in print form - the consolidated name for a Geographical Object, the parts of a Geographical Name need to be assembled in a particular order and perhaps processes to make contractions etc. The logic for this is not contained in the Classes or Properties of the model but in this Templating section.
 
 Users of this model are free to implement additional templates and template logic to suit their needs.
 
 === Basic Template
 
-This template assembled the Road Label's Feature Label Components in the most basic manner, which is also the manner expected to be used most commonly.
+This template assembled the Geographical Name parts in the most basic manner, which is also the manner expected to be used most commonly.
 
 The template, in EBNF form <<ISO-IEC-14977>>, is:
 
@@ -22,32 +23,27 @@ extended_letters = "A" | "B" | "C" | "D" | "E" | "F" | "G"
        | "x" | "y" | "z" | " " | "-" ;
 prefix = extended_letters
 prefix_spaced = prefix, space
-name = extended_letters
-type = extended_letters
-type_spaced = space, type
+given_name = extended_letters
 suffix = extended_letters
 suffix_spaced = space, suffix
 
-road_label = [prefix_spaced], name, [type_spaced], [suffix_spaced]
+geographical_name = [prefix_spaced], given_name, [suffix_spaced]
 ```
 
-Consider a Road Label with the following Feature Label Components:
+Consider a Geographical Name with the following parts:
 
-* Road Name, value text "Yundah"
-* Road Type, value text "Street"
-* Road Suffix, value text "South"
+* Geographical Given Name, value text "Caboolture"
+* Geographical Name Suffix, value text "South"
 
 The template would result in this:
 
 ```
 space = " "
-name = "Yundah"
-type = "Street"
-type_spaced = " Street"
+name = "Caboolture"
 suffix = "South"
 suffix_spaced = " South"
 
-road_label = "Yundah Street South"
+geographical_name = "Caboolture South"
 ```
 
 === Short Form Template
@@ -56,27 +52,24 @@ This Short Form Template is an example of an alternative template to the Basic T
 
 This template uses the same layout logic as the Basic Template but makes certain contractions:
 
-* *Street Type*
-** Street -> St
-** Road -> Rd
-** Crescent -> Crs
-
-Etc., as per address regulations such as AS 4590.
-
-* *Street Suffix*
+* *Geographical Name Suffix*
 ** North -> Nth
 ** South -> Sth
 ** East -> Est
 ** West -> Wst
 
-Consider a Road Label with the following Feature Label Components:
+Consider a Geographical Name with the following parts:
 
-* Road Name, value text "Yundah"
-* Road Type, value text "Street"
-* Road Suffix, value text "South"
+* Geographical Given Name, value text "Caboolture"
+* Geographical Name Suffix, value text "South"
 
-This template's result for these values will be calculated as per the Basic Template example with the same input values but with the contractions from the lists above applied result in:
+This template's result for these values will be calculated as per the Basic Template example with the same input values but with the contractions from the list above applied result in:
 
 ```
-Yundah St Sth
+space = " "
+name = "Caboolture"
+suffix = "Sth"
+suffix_spaced = " Sth"
+
+geographical_name = "Caboolture Sth"
 ```

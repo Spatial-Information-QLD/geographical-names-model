@@ -16,6 +16,8 @@ This model is built on a small set of well-regarded Semantic Web models which us
 |Prefix | Namespace | Description
 
 | `*:*` | `*https://linked.data.gov.au/def/gn/*` | *This model*
+| `gpt` | `*https://linked.data.gov.au/def/gn-part-types*/` | Supporting vocabulary - Geographic Name Part Types
+| `goc` | `*https://linked.data.gov.au/def/go-categories*/` | Supporting vocabulary - Geographic Object Categories
 | `cn` | `https://linked.data.gov.au/def/cn/` | Compound Name Model
 | `dcterms` | `http://purl.org/dc/terms/` | Dublin Core Terms
 | `ex` | `http://example.com/` | Generic examples

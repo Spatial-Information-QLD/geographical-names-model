@@ -1,0 +1,18 @@
+== Requirements
+
+Here are the itemised Requirements referenced in the <<Sources of Requirements>> subsection of the <<Introduction>> and note for them on how this model satisfies them.
+
+=== Requirements List
+
+[cols="1,2,3"]]
+|===
+| ID | Name | Description
+
+| Req01 | _MUST_ align with Address modelling | Profiles the Compound Naming Model <<CNM>> and the Lifecycle Model <<LM>> which the QSI Address Model also profiles
+| Req02 | _MUST_ implement the Feature Name / Feature pattern | Implements Road Name & Road Object to specialise the pattern for roads
+| Req03 | _MUST_ be interoperable with detailed spatial object modelling, for example of the sort implemented in the Cadastre Model | Implements Road Object as a GeoSPARQL Feature to which any GeoSPARQL spatial modelling can be applied
+| Req04 | _MUST_ allow for name changes over time | Allows the Lifecycle Model <<LM>> to be applied to names
+| Req05 | _MUST_ allow for official/unofficial names | Allows for Provenance Ontology <<PROV>> _qualified attribution_ to be applied to names
+| Req06 | _MUST_ allow for indigenous naming | Allows for multiple language names
+| Req07 | _MUST_ allow for named object categorisation | Allows for Geographical Object categorisation using the established ICSM categories as a vocabulary
+|===

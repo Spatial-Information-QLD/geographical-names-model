@@ -1,0 +1,17 @@
+== Supporting Vocabularies
+
+This model depends on several vocabularies to give specific values for certain theming - general classification - and sub-typing properties.
+
+The vocabularies are all independently-published and governed Knowledge Graph artifacts and do not record any relation to this model in their own data.
+
+The vocabularies' details are given in the table below.
+
+|===
+| Persistent IRI | Name | Description  | Model property
+
+4+| *Geographical Objects*
+| `https://linked.data.gov.au/def/go-categories` | Geographical Object Categories | A 3-level hierarchy of Geographical (Place) Object categories | `sdo:additionalType` for a Geographical Object
+4+| *Geographical Names*
+| `https://linked.data.gov.au/def/gn-part-types` | Geographical Part Types | This vocabulary describes values of name part types used in geographical naming | `sdo:additionalType` for a Geographical Name's Compound Name part
+| `https://linked.data.gov.au/def/gn-statuses` | Geographical Name Statuses | This vocabulary contains classifications of how official, or otherwise, a Geographical Name is | `sdo:additionalType` for a Geographical Name's Lifecycle Stage
+|===

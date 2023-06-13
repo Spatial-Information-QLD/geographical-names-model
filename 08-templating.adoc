@@ -1,0 +1,75 @@
+== Templating
+
+
+To present - on screen or in print form - the consolidated name for a Geographical Object, the parts of a Geographical Name need to be assembled in a particular order and perhaps processes to make contractions etc. The logic for this is not contained in the Classes or Properties of the model but in this Templating section.
+
+Users of this model are free to implement additional templates and template logic to suit their needs.
+
+=== Basic Template
+
+This template assembled the Geographical Name parts in the most basic manner, which is also the manner expected to be used most commonly.
+
+The template, in EBNF form <<ISO-IEC-14977>>, is:
+
+```
+space = " "
+extended_letters = "A" | "B" | "C" | "D" | "E" | "F" | "G"
+       | "H" | "I" | "J" | "K" | "L" | "M" | "N"
+       | "O" | "P" | "Q" | "R" | "S" | "T" | "U"
+       | "V" | "W" | "X" | "Y" | "Z" | "a" | "b"
+       | "c" | "d" | "e" | "f" | "g" | "h" | "i"
+       | "j" | "k" | "l" | "m" | "n" | "o" | "p"
+       | "q" | "r" | "s" | "t" | "u" | "v" | "w"
+       | "x" | "y" | "z" | " " | "-" ;
+prefix = extended_letters
+prefix_spaced = prefix, space
+given_name = extended_letters
+suffix = extended_letters
+suffix_spaced = space, suffix
+
+geographical_name = [prefix_spaced], given_name, [suffix_spaced]
+```
+
+Consider a Geographical Name with the following parts:
+
+* Geographical Given Name, value text "Caboolture"
+* Geographical Name Suffix, value text "South"
+
+The template would result in this:
+
+```
+space = " "
+name = "Caboolture"
+suffix = "South"
+suffix_spaced = " South"
+
+geographical_name = "Caboolture South"
+```
+
+=== Short Form Template
+
+This Short Form Template is an example of an alternative template to the Basic Template above.
+
+This template uses the same layout logic as the Basic Template but makes certain contractions:
+
+* *Geographical Name Suffix*
+** North -> Nth
+** South -> Sth
+** East -> Est
+** West -> Wst
+
+Consider a Geographical Name with the following parts:
+
+* Geographical Given Name, value text "Caboolture"
+* Geographical Name Suffix, value text "South"
+
+This template's result for these values will be calculated as per the Basic Template example with the same input values but with the contractions from the list above applied result in:
+
+```
+space = " "
+name = "Caboolture"
+suffix = "Sth"
+suffix_spaced = " Sth"
+
+geographical_name = "Caboolture Sth"
+```

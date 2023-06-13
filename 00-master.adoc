@@ -1,0 +1,38 @@
+= Geographical Names Model
+:toc: left
+:table-stripes: even
+:sectids:
+:sectanchors:
+:sectnums:
+
+:sectnums!:
+
+==== _A Semantic Web data model used for geographical names information_
+
+[[fig-overview]]
+.An overview of this model
+image::img/Overview.svg[]
+
+:sectnums:
+
+include::01-metadata.adoc[]
+
+include::02-preamble.adoc[]
+
+include::03-introduction.adoc[]
+
+include::04-model.adoc[]
+
+include::05-supporting-vocabularies.adoc[]
+
+include::06-requirements.adoc[]
+
+include::07-validation.adoc[]
+
+include::08-templating.adoc[]
+
+include::09-examples.adoc[]
+
+:sectnums!:
+
+include::99-bibliography.adoc[]

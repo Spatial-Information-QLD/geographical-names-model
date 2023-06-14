@@ -28,6 +28,7 @@ jobs:
         asciidoctor 00-master.adoc -o docs/model.html
         echo "Add images to docs/"
         cp -r img docs/
+        cp .nojekyll docs/
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:

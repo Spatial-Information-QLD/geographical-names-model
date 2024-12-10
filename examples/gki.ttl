@@ -1,0 +1,65 @@
+# Great Keppel Island with several alternate, unofficial, Aboriginal names
+
+PREFIX cn: <https://linked.data.gov.au/def/cn/>
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX gn: <https://linked.data.gov.au/def/gn/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX lifecycle: <https://linked.data.gov.au/def/lifecycle/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <https://schema.org/>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+<https://linked.data.gov.au/dataset/qld-addr/gn/14713>
+    a
+        cn:CompoundName ,
+        gn:GeographicalName ;
+    schema:name "Great Keppel Island" ;
+    cn:hasAuthority <https://linked.data.gov.au/def/naming-authority/qld-pn-act-1994> ;
+    cn:isNameFor <https://linked.data.gov.au/dataset/qld-addr/go/14713> ;
+    lifecycle:hasLifecycleStage
+        [
+            schema:additionalType <https://linked.data.gov.au/def/gn-statuses/gazetted> ;
+        ] ;
+    schema:additionalProperty
+        [
+            schema:propertyID "status" ;
+            schema:value "Y" ;
+        ] ,
+        [
+            schema:propertyID "currency" ;
+            schema:value "Y" ;
+        ] ;
+    schema:hasPart
+        [
+            schema:value "Great Keppel"@en ;
+            schema:additionalType <https://linked.data.gov.au/def/gn-part-types/geographicalGivenName> ;
+        ] ;
+    skos:historyNote """Derived from the naming of the Keppel Islands by Lieutenant James Cook RN (1728-1779), HM Bark Endeavour, 27 May 1770, after Admiral Augustus Keppel Rn (1725-1786) Viscount Keppel and First Lord of the Admiralty 1782-83. Refer J.C. Beaglehole. The voyage of the Endeavour 1768-1771. Cambridge (UK), 1968, p.328.
+
+Alternative name supplied by Woppaburra Trustees and Elders, and supported by information in Dr Walter E Roth.P.A. report \"The Aborigines of the Rockhampton and Surrounding Coast Districts\" dated 6th July 1898.  The alternative name of \"Wapparaburra\" appears on Admiralty Charts and Departmental records however there is doubt as to the spelling. The alternate name Woppa was added on 06/08/2021 after being provided to the Department by the Applicant for the Woppaburra People Native Title Determination Application (QUD16/2019) on 18/06/2021 who also confirmed Woppa is the preferred alternate name.""" ;
+    cn:nameTemplate "{geographicalGivenName} {geographicalObjectCategory}" ;
+.
+
+<https://linked.data.gov.au/dataset/qld-addr/go/14713>
+    a gn:GeographicalObject ;
+    geo:hasGeometry
+        [
+            geo:asWKT "POINT (150.96056 -23.17611)"^^geo:wktLiteral ;
+        ] ;
+    schema:additionalType <https://linked.data.gov.au/def/go-categories/island> ;
+    schema:identifier "14713"^^<urn:ladb:sir-id> ;
+    schema:name <https://linked.data.gov.au/dataset/qld-addr/gn/14713> ;
+.
+
+#
+# made by hand
+#
+
+<https://linked.data.gov.au/dataset/qld-addr/gn/14713>
+    schema:alternateName
+        "Woppa"@aus ,
+        "WAPPARABURRA"@aus ,
+        "WOPPABURRA"@aus ;
+.

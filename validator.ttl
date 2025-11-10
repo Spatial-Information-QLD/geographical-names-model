@@ -97,7 +97,7 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
     sh:targetObjectsOf schema:hasPart ;
     sh:property [
         sh:path schema:value ;
-        sh:class cn:CompoundName ;
+        sh:nodeKind IRIOrLiteral ;
         sh:minCount 1;
         sh:maxCount 1;
     ] ,
@@ -107,7 +107,7 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
         sh:minCount 1;
         sh:maxCount 1;
     ] ;
-    sh:message "Each part of a Geographical Name must indicate exactly one schema:value predicate indicating exactly one cn:CompoundName object and one schema:roleName predicate indicating an IRI" ;
+    sh:message "Each part of a Geographical Name must indicate exactly one schema:value predicate indicating exactly one literal value or a cn:CompoundName object and one schema:roleName predicate indicating an IRI" ;
 .
 
 :gn-role-vocab

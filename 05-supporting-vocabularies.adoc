@@ -10,10 +10,10 @@ The vocabularies' details are given in the table below.
 | Persistent IRI | Name | Description  | Model property
 
 4+| *Geographical Object *
-| `https://linked.data.gov.au/def/go-categories` | Geographical Object Categories | A 3-level hierarchy of Geographical (Place) Object categories | `sdo:additionalType` for a Geographical Object
+| `https://linked.data.gov.au/def/go-categories` | Geographical Object Categories | A 3-level hierarchy of Geographical (Place) Object categories | `schema:additionalType` for a Geographical Object
 4+| *Geographical Names*
-| `https://linked.data.gov.au/def/gn-part-types` | Geographical Part Types | This vocabulary describes values of name part types used in geographical naming | `sdo:additionalType` for a Geographical Name's Compound Name part
-| `https://linked.data.gov.au/def/gn-statuses` | Geographical Name Statuses | This vocabulary contains classifications of how official, or otherwise, a Geographical Name is | `sdo:additionalType` for a Geographical Name's Lifecycle Stage
+| `https://linked.data.gov.au/def/gn-part-types` | Geographical Part Types | This vocabulary describes values of name part types used in geographical naming | `schema:additionalType` for a Geographical Name's Compound Name part
+| `https://linked.data.gov.au/def/gn-statuses` | Geographical Name Statuses | This vocabulary contains classifications of how official, or otherwise, a Geographical Name is | `schema:additionalType` for a Geographical Name's Lifecycle Stage
 |===
 
 These vocabularies are all hosted on the ICSM Vocabulary Server at <https://icsm.information.qld.gov.au>.

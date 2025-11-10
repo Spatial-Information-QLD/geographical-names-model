@@ -8,8 +8,8 @@ This model defines only three Classes and one Property but reuses many Classes a
 === Classes
 
 * <<GeographicalName>>
-* <<GeographicalObject>>
 * <<ISAPronunciation>>
+* <<GeographicalObject>>
 * <<CompoundName>>
 * <<LifecycleStage>>
 * <<Feature>>
@@ -29,9 +29,9 @@ This model defines only three Classes and one Property but reuses many Classes a
 | Preferred Label | Geographical Name
 | Definition | The Geographical Name class represents structured information that allows unambiguous determination of a Geographical Object for the purposes of identification and location
 | Is Defined By | This model
-| Sub-class Of | https://linked.data.gov.au/def/cn/CompoundName[`cn:CompoundName`]
+| Subclass Of | https://linked.data.gov.au/def/cn/CompoundName[`cn:CompoundName`]
 | History Note | Specialised from <<CNM>>'s Compound Name class
-| Expected Properties | <<isNameFor>>, <<value>>, <<additionalType>>, <<hasPart>>, <<hasLifecycleStage>>, <<hasPronunciation>>
+| Expected Properties | <<hasCompoundedName>>  <<isNameFor>>, <<value>>, <<additionalType>>, <<hasNamePart>>, <<hasLifecycleStage>>, <<hasPronunciation>>
 | Example
 a| [source,turtle]
 ----
@@ -40,18 +40,41 @@ a| [source,turtle]
 ex:geographical-name-x
   a :GeographicalName ;
   cn:isNameFor ex:geographical-object-y ;
-  rdf:value "Shorncliffe"@en ;
-  sdo:additionalType gpt:GeographicalGivenName ;
-  sdo:description "Name originally an English place name..." ;
+  cn:hasCompoundedName "Shorncliffe"@en ;
+  cn:hasPronunciation "[ʃɔrnklɪf]"^^cn:IPAPronunciation ;
+  cn:hasNamePart [
+    schema:value "Shorncliffe" ;
+    schema:roleName <https://linked.data.gov.au/def/gn-part-types/geographicalGivenName> ;
+  ] ;
+  schema:description "Name originally an English place name..." ;
   skos:historyNote "Originally approved by Queensland Place Names Board.." ;
-  :hasPronunciation "[ʃɔrnklɪf]"^^:IPAPronunciation ;
+  cn:hasGeocode [
+    schema:value [
+        a geo:Geometry ;
+        geo:asWKT "POINT (( ... ))"^^geo:wktLiteral ;
+    ] ;
+    schema:roleName <https://linked.data.gov.au/def/geocode-types/centroid> ;
+  ] ;
 .
 
 ex:geographical-object-y
   a :GeographicalObject ;
-  sdo:additionalType goc:Neighbourhood ;
+  schema:additionalType goc:Neighbourhood ;
 .
 ----
+|===
+
+[[ISAPronunciation]]
+==== ISA Pronunciation
+
+[cols="2,6"]
+|===
+| Property | Value
+
+| IRI | `cn:ISAPronunciation`
+| Preferred Label | ISA Pronunciation
+| Definition | A textual datatype that uses ISA Pronunciation syntax
+| Is Defined By | <<CNM>>
 |===
 
 [[GeographicalObject]]
@@ -65,36 +88,19 @@ ex:geographical-object-y
 | Preferred Label | Geographical Object
 | Definition | A geospatial object that is unambiguously identified by a Geographical Name.
 | Is Defined By | This model
-| Sub-class Of | https://opengeospatial.github.io/ogc-geosparql/geosparql11/spec.html#_class_geofeature[`geo:Feature`]
+| Subclass Of | https://opengeospatial.github.io/ogc-geosparql/geosparql11/spec.html#_class_geofeature[`geo:Feature`]
 | History Note | Specialised from <<GEO>>'s Feature class, as used in <<CNM>>
 | Scope note | Judgement as to what makes for a permissible GeographicalObject rests with the implementer. This model's technical requirements are only that the object is a legal `geo:Feature` object, thus implementers may make Geographical Objects of almost anything.
 | Required Properties | <<additionalType>>: Instances of this object _MUST_ indicate a value for <<additionalType>> with a value taken from a controlled vocabulary, such as _Geographical Object Categories_ in the section <<Supporting Vocabularies>>
-| Expected Properties | <<hasGeometry>>, <<hasPart>>
+| Expected Properties | <<hasGeometry>>, <<hasNamePart>>
 | Example
 a| [source,turtle]
 ----
 ex:geographical-object-y
   a :GeographicalObject ;
-  sdo:additionalType goc:Neighbourhood ;
+  schema:additionalType goc:Neighbourhood ;
 .
 ----
-|===
-
-[[ISAPronunciation]]
-==== ISA Pronunciation
-
-[cols="2,6"]
-|===
-| Property | Value
-
-| IRI | `:ISAPronunciation`
-| Preferred Label | ISA Pronunciation
-| Definition | A textual datatype that uses ISA Pronunciation syntax
-| Is Defined By | This model
-| Sub-class Of | https://w3c.github.io/rdf-concepts/spec/#section-Datatypes[`rdfs:Datatype`]
-| History Note | Create in this model
-| Scope note | Use this to indicate that the object of the predicate `:hasPronunciation` uses ISA Pronunciation syntax
-| Example | See example for <<hasPronunciation>>
 |===
 
 [[CompoundName]]
@@ -123,6 +129,21 @@ ex:geographical-object-y
 | Definition | A Compound Name is a literal value, or objects that can be interpreted as literal values, that describe or name a Feature
 | Is Defined By | https://linked.data.gov.au/def/lifecycle[Lifecycle Model]
 | Scope Note | Used to indicate the lifecycle stage of any Roads Model part. Different stage types may be necessary for different class instances such as Road Name and Road Object and may be sourced from different vocabularies
+|===
+
+[[Geocode]]
+==== Geocode
+
+[cols="2,6"]
+|===
+| Property | Value
+
+| IRI | `cn:Geocode`
+| Preferred Label | Geocode
+| Subclass of | `geo:Geometry`
+| Definition | A location with a role
+| Is Defined By | <<CNM>>
+| Scope Note | Used to give additional location information for a name, beyond the spatial information associated with the object it is a name for
 |===
 
 [[Feature]]
@@ -198,41 +219,20 @@ ex:geographical-object-y
 [[Properties]]
 === Properties
 
-* <<hasPronunciation>>
+* <<hasCompoundedName>>
 * <<isNameFor>>
+* <<hasNamePart>>
 * <<hasLifecycleStage>>
 * <<value>>
+* <<hasPronunciation>>
 * <<additionalType>>
-* <<hasPart>>
+* <<hasGeocode>>
 * <<hasGeometry>>
 * <<description>>
 * <<historyNote>>
 
-[[hasPronunciation]]
-==== has pronunciation
-
-[cols="2,6"]
-|===
-| Property | Value
-
-| IRI | `:hasPronunciation`
-| Preferred Label | has pronunciation
-| Definition | Indicated a pronunciation guide for the subject's name
-| Is Defined By | This model
-| Domain | <<CompoundName>>
-| Range | <<ISAPronunciation>>
-| Scope Note | Used to link a name to a pronunciation guide for it
-| Example
-a| [source,turtle]
-----
-# Shorncliffe, pronounced [ʃɔrnklɪf]
-ex:geographical-name-x
-  a :GeographicalName ;
-  rdf:value "Shorncliffe"@en ;
-  :hasPronunciation "[ʃɔrnklɪf]"^^:IPAPronunciation ;
-.
-----
-|===
+[[hasCompoundedName]]
+==== has compounded name
 
 [[isNameFor]]
 ==== is name for
@@ -243,7 +243,7 @@ ex:geographical-name-x
 
 | IRI | `cn:isNameFor`
 | Preferred Label | is name for
-| Definition | Inverse of `sdo:name`
+| Definition | Inverse of `schema:name`
 | Is Defined By | <<CNM>>
 | Domain | <<CompoundName>>
 | Range | <<Feature>>
@@ -261,7 +261,7 @@ ex:road-name-x
 
 ex:road-object-y
     a :RoadObject , geo:Feature ;
-    sdo:name ex:road-name-x ;
+    schema:name ex:road-name-x ;
 .
 ----
 |===
@@ -293,14 +293,14 @@ ex:road-name-x
       time:hasBeginning [ time:inXSDDate "1982-02-10"^^xsd:date ] ;
       time:hasEnd [ time:inXSDDate "1982-05-11"^^xsd:date ] ;
     ] ;
-    sdo:additionalType lm:proposed ;
+    schema:additionalType lm:proposed ;
   ] ,
   [
     # this Stage is still in effect - no hasEnd given
     time:hasTime [
       time:hasBeginning [ time:inXSDDate "1982-05-11"^^xsd:date ] ;
     ] ;
-    sdo:additionalType lm:current ;
+    schema:additionalType lm:current ;
   ] ,
 .
 ----
@@ -313,11 +313,37 @@ ex:road-name-x
 |===
 | Property | Value
 
-| IRI | `rdf:value`
+| IRI | `schema:value`
 | Preferred Label | value
 | Definition | Idiomatic property used for structured values
 | Is Defined By | <<RDF>>
 | Scope Note | Used to indicate literal or object values for <<CompoundName>> objects
+|===
+
+[[hasPronunciation]]
+==== has pronunciation
+
+[cols="2,6"]
+|===
+| Property | Value
+
+| IRI | `cn:hasPronunciation`
+| Preferred Label | has pronunciation
+| Definition | Indicates a pronunciation guide for the subject's name
+| Is Defined By | <<CNM>>
+| Domain | <<CompoundName>>
+| Range | <<ISAPronunciation>>
+| Scope Note | Used to link a name to a pronunciation guide for it
+| Example
+a| [source,turtle]
+----
+# Shorncliffe, pronounced [ʃɔrnklɪf]
+ex:geographical-name-x
+  a :GeographicalName ;
+  schema:value "Shorncliffe"@en ;
+  cn:hasPronunciation "[ʃɔrnklɪf]"^^cn:IPAPronunciation ;
+.
+----
 |===
 
 [[additionalType]]
@@ -327,25 +353,40 @@ ex:road-name-x
 |===
 | Property | Value
 
-| IRI | `sdo:additionalType`
+| IRI | `schema:additionalType`
 | Preferred Label | additionalType
 | Definition | An additional type for the item, typically used for adding more specific types from external vocabularies
 | Is Defined By | <<SDO>>
 | Scope Note | Used to indicate a subtype for Road Name and Road Object instances
 |===
 
-[[hasPart]]
-==== hasPart
+[[hasNamePart]]
+==== hasNamePart
 
 [cols="2,6"]
 |===
 | Property | Value
 
-| IRI | `sdo:hasPart`
-| Preferred Label | has part
-| Definition | Indicates a part of a whole
-| Is Defined By | <<SDO>>
-| Scope Note | Used to indicate the parts of a Road Name or of a Road Object
+| IRI | `cn:hasNamePart`
+| Preferred Label | has name part
+| Definition | Indicates a part of name
+| Is Defined By | <<CNM>>
+| Scope Note | Used to indicate the name parts of a Geographical Name
+|===
+
+[[hasGeocode]]
+==== hasGeocode
+
+[cols="2,6"]
+|===
+| Property | Value
+
+| IRI | `cn:hasGeocode`
+| Preferred Label | has geometry
+| Definition | Indicated a geocode for a name
+| Is Defined By | <<GEO>>
+| Domain | <<CompoundName>>
+| Range | <<Geocode>>
 |===
 
 [[hasGeometry]]
@@ -371,7 +412,7 @@ ex:road-name-x
 |===
 | Property | Value
 
-| IRI | `sdo:description`
+| IRI | `schema:description`
 | Preferred Label | description
 | Definition | A description of the item
 | Is Defined By | <<SDO>>
@@ -385,7 +426,7 @@ ex:road-name-x
 |===
 | Property | Value
 
-| IRI | `sdo:historyNote`
+| IRI | `schema:historyNote`
 | Preferred Label | history note
 | Definition | A note about the past state/use/meaning of a concept
 | Is Defined By | <<SKOS>>

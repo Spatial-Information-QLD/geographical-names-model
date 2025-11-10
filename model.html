@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.16">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <title>Geographical Names Model</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -84,10 +84,10 @@ code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;
 ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
 ul,ol{margin-left:1.5em}
 ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
-ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
-ul.square{list-style-type:square}
 ul.circle{list-style-type:circle}
 ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
 ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
 dl dt{margin-bottom:.3125em;font-weight:bold}
 dl dd{margin-bottom:1.25em}
@@ -193,7 +193,8 @@ body.toc2.toc-right{padding-left:0;padding-right:20em}}
 #content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
 details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
 details{margin-left:1.25rem}
-details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;-webkit-tap-highlight-color:transparent}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
 details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
 details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
 details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
@@ -207,13 +208,10 @@ table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
 .admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
 .admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
 .exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
-.exampleblock>.content>:first-child{margin-top:0}
-.exampleblock>.content>:last-child{margin-bottom:0}
 .sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
-.sidebarblock>:first-child{margin-top:0}
-.sidebarblock>:last-child{margin-bottom:0}
 .sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
-.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
 .literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
 @media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
 @media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
@@ -235,9 +233,8 @@ pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
 table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
 table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
 table.linenotable td.code{padding-left:.75em}
-table.linenotable td.linenos{border-right:1px solid;opacity:.35;padding-right:.5em}
-pre.pygments .lineno{border-right:1px solid;opacity:.35;display:inline-block;margin-right:.75em}
-pre.pygments .lineno::before{content:"";margin-right:-.125em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
 .quoteblock{margin:0 1em 1.25em 1.5em;display:table}
 .quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
 .quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
@@ -274,7 +271,7 @@ table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-c
 table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
 table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
 table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
-table.stripes-all tr,table.stripes-odd tr:nth-of-type(odd),table.stripes-even tr:nth-of-type(even),table.stripes-hover tr:hover{background:#f8f8f7}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
 th.halign-left,td.halign-left{text-align:left}
 th.halign-right,td.halign-right{text-align:right}
 th.halign-center,td.halign-center{text-align:center}
@@ -290,10 +287,11 @@ ol{margin-left:1.75em}
 ul li ol{margin-left:1.5em}
 dl dd{margin-left:1.125em}
 dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
-ol>li p,ul>li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
 ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
 ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
 ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
 ul.checklist>li>p:first-child{margin-left:-1em}
 ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
 ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
@@ -336,8 +334,6 @@ sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
 #footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
 #footnotes .footnote:last-of-type{margin-bottom:0}
 #content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
-.gist .file-data>table{border:0;background:#fff;width:100%;margin-bottom:0}
-.gist .file-data>table td.line-data{width:99%}
 div.unbreakable{page-break-inside:avoid}
 .big{font-size:larger}
 .small{font-size:smaller}
@@ -394,7 +390,7 @@ b.conum *{color:inherit!important}
 dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
 h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
 p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
-p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
 p{margin-bottom:1.25rem}
 .sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
 .exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
@@ -979,10 +975,10 @@ This model does not attempt to assist with detail geospatial aspects of geograph
 <p><a href="#GeographicalName">Geographical Name</a></p>
 </li>
 <li>
-<p><a href="#GeographicalObject">Geographical Object</a></p>
+<p><a href="#ISAPronunciation">ISA Pronunciation</a></p>
 </li>
 <li>
-<p><a href="#ISAPronunciation">ISA Pronunciation</a></p>
+<p><a href="#GeographicalObject">Geographical Object</a></p>
 </li>
 <li>
 <p><a href="#CompoundName">Compound Name</a></p>
@@ -1038,7 +1034,7 @@ This model does not attempt to assist with detail geospatial aspects of geograph
 <td class="tableblock halign-left valign-top"><p class="tableblock">This model</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Sub-class Of</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Subclass Of</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://linked.data.gov.au/def/cn/CompoundName"><code>cn:CompoundName</code></a></p></td>
 </tr>
 <tr>
@@ -1047,7 +1043,7 @@ This model does not attempt to assist with detail geospatial aspects of geograph
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Expected Properties</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#isNameFor">is name for</a>, <a href="#value">value</a>, <a href="#additionalType">additionalType</a>, <a href="#hasPart">hasPart</a>, <a href="#hasLifecycleStage">has lifecycle stage</a>, <a href="#hasPronunciation">has pronunciation</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#hasCompoundedName">has compounded name</a>  <a href="#isNameFor">is name for</a>, <a href="#value">value</a>, <a href="#additionalType">additionalType</a>, <a href="#hasNamePart">hasNamePart</a>, <a href="#hasLifecycleStage">has lifecycle stage</a>, <a href="#hasPronunciation">has pronunciation</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Example</p></td>
@@ -1058,16 +1054,26 @@ This model does not attempt to assist with detail geospatial aspects of geograph
 ex:geographical-name-x
   a :GeographicalName ;
   cn:isNameFor ex:geographical-object-y ;
-  rdf:value "Shorncliffe"@en ;
-  sdo:additionalType gpt:GeographicalGivenName ;
-  sdo:description "Name originally an English place name..." ;
+  cn:hasCompoundedName "Shorncliffe"@en ;
+  cn:hasPronunciation "[ʃɔrnklɪf]"^^cn:IPAPronunciation ;
+  cn:hasNamePart [
+    schema:value "Shorncliffe" ;
+    schema:roleName &lt;https://linked.data.gov.au/def/gn-part-types/geographicalGivenName&gt; ;
+  ] ;
+  schema:description "Name originally an English place name..." ;
   skos:historyNote "Originally approved by Queensland Place Names Board.." ;
-  :hasPronunciation "[ʃɔrnklɪf]"^^:IPAPronunciation ;
+  cn:hasGeocode [
+    schema:value [
+        a geo:Geometry ;
+        geo:asWKT "POINT (( ... ))"^^geo:wktLiteral ;
+    ] ;
+    schema:roleName &lt;https://linked.data.gov.au/def/geocode-types/centroid&gt; ;
+  ] ;
 .
 
 ex:geographical-object-y
   a :GeographicalObject ;
-  sdo:additionalType goc:Neighbourhood ;
+  schema:additionalType goc:Neighbourhood ;
 .</code></pre>
 </div>
 </div></div></td>
@@ -1076,7 +1082,40 @@ ex:geographical-object-y
 </table>
 </div>
 <div class="sect3">
-<h4 id="GeographicalObject"><a class="anchor" href="#GeographicalObject"></a>4.1.2. Geographical Object</h4>
+<h4 id="ISAPronunciation"><a class="anchor" href="#ISAPronunciation"></a>4.1.2. ISA Pronunciation</h4>
+<table class="tableblock frame-all grid-all stripes-even stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IRI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cn:ISAPronunciation</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Preferred Label</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ISA Pronunciation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Definition</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A textual datatype that uses ISA Pronunciation syntax</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Is Defined By</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#CNM">CNM</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="GeographicalObject"><a class="anchor" href="#GeographicalObject"></a>4.1.3. Geographical Object</h4>
 <table class="tableblock frame-all grid-all stripes-even stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1106,7 +1145,7 @@ ex:geographical-object-y
 <td class="tableblock halign-left valign-top"><p class="tableblock">This model</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Sub-class Of</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Subclass Of</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://opengeospatial.github.io/ogc-geosparql/geosparql11/spec.html#_class_geofeature"><code>geo:Feature</code></a></p></td>
 </tr>
 <tr>
@@ -1123,7 +1162,7 @@ ex:geographical-object-y
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Expected Properties</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#hasGeometry">hasGeometry</a>, <a href="#hasPart">hasPart</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#hasGeometry">hasGeometry</a>, <a href="#hasNamePart">hasNamePart</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Example</p></td>
@@ -1131,59 +1170,10 @@ ex:geographical-object-y
 <div class="content">
 <pre class="highlight"><code class="language-turtle" data-lang="turtle">ex:geographical-object-y
   a :GeographicalObject ;
-  sdo:additionalType goc:Neighbourhood ;
+  schema:additionalType goc:Neighbourhood ;
 .</code></pre>
 </div>
 </div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="ISAPronunciation"><a class="anchor" href="#ISAPronunciation"></a>4.1.3. ISA Pronunciation</h4>
-<table class="tableblock frame-all grid-all stripes-even stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 75%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Property</th>
-<th class="tableblock halign-left valign-top">Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">IRI</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>:ISAPronunciation</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Preferred Label</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ISA Pronunciation</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Definition</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A textual datatype that uses ISA Pronunciation syntax</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Is Defined By</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">This model</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Sub-class Of</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://w3c.github.io/rdf-concepts/spec/#section-Datatypes"><code>rdfs:Datatype</code></a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">History Note</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Create in this model</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Scope note</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Use this to indicate that the object of the predicate <code>:hasPronunciation</code> uses ISA Pronunciation syntax</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Example</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">See example for <a href="#hasPronunciation">has pronunciation</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -1263,7 +1253,48 @@ ex:geographical-object-y
 </table>
 </div>
 <div class="sect3">
-<h4 id="Feature"><a class="anchor" href="#Feature"></a>4.1.6. Feature</h4>
+<h4 id="Geocode"><a class="anchor" href="#Geocode"></a>4.1.6. Geocode</h4>
+<table class="tableblock frame-all grid-all stripes-even stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IRI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cn:Geocode</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Preferred Label</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Geocode</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Subclass of</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>geo:Geometry</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Definition</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A location with a role</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Is Defined By</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#CNM">CNM</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scope Note</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used to give additional location information for a name, beyond the spatial information associated with the object it is a name for</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="Feature"><a class="anchor" href="#Feature"></a>4.1.7. Feature</h4>
 <table class="tableblock frame-all grid-all stripes-even stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1300,7 +1331,7 @@ ex:geographical-object-y
 </table>
 </div>
 <div class="sect3">
-<h4 id="Geometry"><a class="anchor" href="#Geometry"></a>4.1.7. Geometry</h4>
+<h4 id="Geometry"><a class="anchor" href="#Geometry"></a>4.1.8. Geometry</h4>
 <table class="tableblock frame-all grid-all stripes-even stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1337,7 +1368,7 @@ ex:geographical-object-y
 </table>
 </div>
 <div class="sect3">
-<h4 id="Concept"><a class="anchor" href="#Concept"></a>4.1.8. Concept</h4>
+<h4 id="Concept"><a class="anchor" href="#Concept"></a>4.1.9. Concept</h4>
 <table class="tableblock frame-all grid-all stripes-even stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1374,7 +1405,7 @@ ex:geographical-object-y
 </table>
 </div>
 <div class="sect3">
-<h4 id="Resource"><a class="anchor" href="#Resource"></a>4.1.9. Resource</h4>
+<h4 id="Resource"><a class="anchor" href="#Resource"></a>4.1.10. Resource</h4>
 <table class="tableblock frame-all grid-all stripes-even stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1411,7 +1442,7 @@ ex:geographical-object-y
 </table>
 </div>
 <div class="sect3">
-<h4 id="Literal"><a class="anchor" href="#Literal"></a>4.1.10. Literal</h4>
+<h4 id="Literal"><a class="anchor" href="#Literal"></a>4.1.11. Literal</h4>
 <table class="tableblock frame-all grid-all stripes-even stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1453,10 +1484,13 @@ ex:geographical-object-y
 <div class="ulist">
 <ul>
 <li>
-<p><a href="#hasPronunciation">has pronunciation</a></p>
+<p><a href="#hasCompoundedName">has compounded name</a></p>
 </li>
 <li>
 <p><a href="#isNameFor">is name for</a></p>
+</li>
+<li>
+<p><a href="#hasNamePart">hasNamePart</a></p>
 </li>
 <li>
 <p><a href="#hasLifecycleStage">has lifecycle stage</a></p>
@@ -1465,10 +1499,13 @@ ex:geographical-object-y
 <p><a href="#value">value</a></p>
 </li>
 <li>
+<p><a href="#hasPronunciation">has pronunciation</a></p>
+</li>
+<li>
 <p><a href="#additionalType">additionalType</a></p>
 </li>
 <li>
-<p><a href="#hasPart">hasPart</a></p>
+<p><a href="#hasGeocode">hasGeocode</a></p>
 </li>
 <li>
 <p><a href="#hasGeometry">hasGeometry</a></p>
@@ -1482,62 +1519,8 @@ ex:geographical-object-y
 </ul>
 </div>
 <div class="sect3">
-<h4 id="hasPronunciation"><a class="anchor" href="#hasPronunciation"></a>4.2.1. has pronunciation</h4>
-<table class="tableblock frame-all grid-all stripes-even stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 75%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Property</th>
-<th class="tableblock halign-left valign-top">Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">IRI</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>:hasPronunciation</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Preferred Label</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">has pronunciation</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Definition</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Indicated a pronunciation guide for the subject&#8217;s name</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Is Defined By</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">This model</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Domain</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#CompoundName">Compound Name</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Range</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#ISAPronunciation">ISA Pronunciation</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Scope Note</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Used to link a name to a pronunciation guide for it</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Example</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-turtle" data-lang="turtle"># Shorncliffe, pronounced [ʃɔrnklɪf]
-ex:geographical-name-x
-  a :GeographicalName ;
-  rdf:value "Shorncliffe"@en ;
-  :hasPronunciation "[ʃɔrnklɪf]"^^:IPAPronunciation ;
-.</code></pre>
-</div>
-</div></div></td>
-</tr>
-</tbody>
-</table>
+<h4 id="hasCompoundedName"><a class="anchor" href="#hasCompoundedName"></a>4.2.1. has compounded name</h4>
+
 </div>
 <div class="sect3">
 <h4 id="isNameFor"><a class="anchor" href="#isNameFor"></a>4.2.2. is name for</h4>
@@ -1563,7 +1546,7 @@ ex:geographical-name-x
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Definition</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Inverse of <code>sdo:name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Inverse of <code>schema:name</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Is Defined By</p></td>
@@ -1595,7 +1578,7 @@ ex:road-name-x
 
 ex:road-object-y
     a :RoadObject , geo:Feature ;
-    sdo:name ex:road-name-x ;
+    schema:name ex:road-name-x ;
 .</code></pre>
 </div>
 </div></div></td>
@@ -1659,14 +1642,14 @@ ex:road-name-x
       time:hasBeginning [ time:inXSDDate "1982-02-10"^^xsd:date ] ;
       time:hasEnd [ time:inXSDDate "1982-05-11"^^xsd:date ] ;
     ] ;
-    sdo:additionalType lm:proposed ;
+    schema:additionalType lm:proposed ;
   ] ,
   [
     # this Stage is still in effect - no hasEnd given
     time:hasTime [
       time:hasBeginning [ time:inXSDDate "1982-05-11"^^xsd:date ] ;
     ] ;
-    sdo:additionalType lm:current ;
+    schema:additionalType lm:current ;
   ] ,
 .</code></pre>
 </div>
@@ -1691,7 +1674,7 @@ ex:road-name-x
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">IRI</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rdf:value</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>schema:value</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Preferred Label</p></td>
@@ -1713,7 +1696,7 @@ ex:road-name-x
 </table>
 </div>
 <div class="sect3">
-<h4 id="additionalType"><a class="anchor" href="#additionalType"></a>4.2.5. additionalType</h4>
+<h4 id="hasPronunciation"><a class="anchor" href="#hasPronunciation"></a>4.2.5. has pronunciation</h4>
 <table class="tableblock frame-all grid-all stripes-even stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1728,7 +1711,65 @@ ex:road-name-x
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">IRI</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sdo:additionalType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cn:hasPronunciation</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Preferred Label</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">has pronunciation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Definition</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates a pronunciation guide for the subject&#8217;s name</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Is Defined By</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#CNM">CNM</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Domain</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#CompoundName">Compound Name</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Range</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#ISAPronunciation">ISA Pronunciation</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scope Note</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used to link a name to a pronunciation guide for it</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Example</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-turtle" data-lang="turtle"># Shorncliffe, pronounced [ʃɔrnklɪf]
+ex:geographical-name-x
+  a :GeographicalName ;
+  schema:value "Shorncliffe"@en ;
+  cn:hasPronunciation "[ʃɔrnklɪf]"^^cn:IPAPronunciation ;
+.</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="additionalType"><a class="anchor" href="#additionalType"></a>4.2.6. additionalType</h4>
+<table class="tableblock frame-all grid-all stripes-even stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IRI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>schema:additionalType</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Preferred Label</p></td>
@@ -1740,7 +1781,7 @@ ex:road-name-x
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Is Defined By</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#SDO">SDO</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#SDO">schema</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Scope Note</p></td>
@@ -1750,7 +1791,7 @@ ex:road-name-x
 </table>
 </div>
 <div class="sect3">
-<h4 id="hasPart"><a class="anchor" href="#hasPart"></a>4.2.6. hasPart</h4>
+<h4 id="hasNamePart"><a class="anchor" href="#hasNamePart"></a>4.2.7. hasNamePart</h4>
 <table class="tableblock frame-all grid-all stripes-even stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1765,29 +1806,70 @@ ex:road-name-x
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">IRI</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sdo:hasPart</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cn:hasNamePart</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Preferred Label</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">has part</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">has name part</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Definition</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates a part of a whole</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates a part of name</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Is Defined By</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#SDO">SDO</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#CNM">CNM</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Scope Note</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Used to indicate the parts of a Road Name or of a Road Object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used to indicate the name parts of a Geographical Name</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect3">
-<h4 id="hasGeometry"><a class="anchor" href="#hasGeometry"></a>4.2.7. hasGeometry</h4>
+<h4 id="hasGeocode"><a class="anchor" href="#hasGeocode"></a>4.2.8. hasGeocode</h4>
+<table class="tableblock frame-all grid-all stripes-even stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IRI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cn:hasGeocode</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Preferred Label</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">has geometry</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Definition</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indicated a geocode for a name</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Is Defined By</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#GEO">GEO</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Domain</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#CompoundName">Compound Name</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Range</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#Geocode">Geocode</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="hasGeometry"><a class="anchor" href="#hasGeometry"></a>4.2.9. hasGeometry</h4>
 <table class="tableblock frame-all grid-all stripes-even stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1832,7 +1914,7 @@ ex:road-name-x
 </table>
 </div>
 <div class="sect3">
-<h4 id="description"><a class="anchor" href="#description"></a>4.2.8. description</h4>
+<h4 id="description"><a class="anchor" href="#description"></a>4.2.10. description</h4>
 <table class="tableblock frame-all grid-all stripes-even stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1847,7 +1929,7 @@ ex:road-name-x
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">IRI</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sdo:description</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>schema:description</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Preferred Label</p></td>
@@ -1859,7 +1941,7 @@ ex:road-name-x
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Is Defined By</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#SDO">SDO</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#SDO">schema</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Scope Note</p></td>
@@ -1869,7 +1951,7 @@ ex:road-name-x
 </table>
 </div>
 <div class="sect3">
-<h4 id="historyNote"><a class="anchor" href="#historyNote"></a>4.2.9. history note</h4>
+<h4 id="historyNote"><a class="anchor" href="#historyNote"></a>4.2.11. history note</h4>
 <table class="tableblock frame-all grid-all stripes-even stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1884,7 +1966,7 @@ ex:road-name-x
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">IRI</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sdo:historyNote</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>schema:historyNote</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Preferred Label</p></td>
@@ -1937,13 +2019,13 @@ ex:road-name-x
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="4"><p class="tableblock"><strong>Geographical Objects</strong></p></td>
+<td class="tableblock halign-left valign-top" colspan="4"><p class="tableblock">*Geographical Object *</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://linked.data.gov.au/def/go-categories" class="bare">https://linked.data.gov.au/def/go-categories</a></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Geographical Object Categories</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A 3-level hierarchy of Geographical (Place) Object categories</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sdo:additionalType</code> for a Geographical Object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>schema:additionalType</code> for a Geographical Object</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="4"><p class="tableblock"><strong>Geographical Names</strong></p></td>
@@ -1952,16 +2034,19 @@ ex:road-name-x
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://linked.data.gov.au/def/gn-part-types" class="bare">https://linked.data.gov.au/def/gn-part-types</a></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Geographical Part Types</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">This vocabulary describes values of name part types used in geographical naming</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sdo:additionalType</code> for a Geographical Name&#8217;s Compound Name part</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>schema:additionalType</code> for a Geographical Name&#8217;s Compound Name part</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://linked.data.gov.au/def/gn-statuses" class="bare">https://linked.data.gov.au/def/gn-statuses</a></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Geographical Name Statuses</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">This vocabulary contains classifications of how official, or otherwise, a Geographical Name is</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sdo:additionalType</code> for a Geographical Name&#8217;s Lifecycle Stage</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>schema:additionalType</code> for a Geographical Name&#8217;s Lifecycle Stage</p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>These vocabularies are all hosted on the ICSM Vocabulary Server at <a href="https://icsm.information.qld.gov.au" class="bare">https://icsm.information.qld.gov.au</a>.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -2030,7 +2115,43 @@ ex:road-name-x
 <h2 id="_validation"><a class="anchor" href="#_validation"></a>7. Validation</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><em>This section will be completed when Business Rules for Road Labels are determined - etc. June, 2023</em></p>
+<p>A <a href="https://www.w3.org/TR/shacl/">SHACL</a> validator is supplied with this model to allow for the testing of conformance claims to it:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://linked.data.gov.au/def/gn/validator" class="bare">https://linked.data.gov.au/def/gn/validator</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This validator can be used with a number of SHACL validation tools including:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://shacl.org/playground/">SHACL Playground</a> - online</p>
+</li>
+<li>
+<p><a href="https://shacl-playground.zazuko.com/">Zazuko SHACL Playground</a> - onlne, v2 of the above</p>
+</li>
+<li>
+<p><a href="https://pypi.org/project/pyshacl">pySHACL</a> - a Python library for use within code</p>
+</li>
+<li>
+<p><a href="https://tools.kurrawong.ai/validate">KurrawongAI&#8217;s Online SHACL Validator</a> - comes with this validator built in</p>
+</li>
+</ul>
+</div>
+<div id="NOTE" class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Data to be validated with this validator <em>MUST</em> include the data of the <a href="https://linked.data.gov.au/def/gn-part-types">Geographical Name Part Types</a> vocabulary as well. This ensures that name parts in data can be confirmed to be included in the vocabulary.</p>
+</div>
+<div class="paragraph">
+<p>Inclusion can be achieved by merging the vocabulary with data before validation.</p>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -2277,7 +2398,7 @@ Codes for the representation of names of languages — Part 1: Alpha-2 code</em>
 <dd>
 <p>World Wide Web Consortium, <em>RDF 1.2 Schema</em>, W3C First Public Working Draft (16 May 2023). <a href="https://www.w3.org/TR/rdf12-schema/" class="bare">https://www.w3.org/TR/rdf12-schema/</a></p>
 </dd>
-<dt class="hdlist1"><a id="SDO"></a> SDO</dt>
+<dt class="hdlist1"><a id="SDO"></a> schema</dt>
 <dd>
 <p>W3C Schema.org Community Group, <em>schema.org</em>. Community ontology (2015). <a href="https://schema.org" class="bare">https://schema.org</a></p>
 </dd>
@@ -2304,7 +2425,7 @@ Codes for the representation of names of languages — Part 1: Alpha-2 code</em>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-12-10 03:53:29 UTC
+Last updated 2025-11-10 04:28:15 UTC
 </div>
 </div>
 </body>

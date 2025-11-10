@@ -33,8 +33,12 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
         ] ;
     schema:hasPart
         [
-            schema:value "Great Keppel"@en ;
-            schema:additionalType <https://linked.data.gov.au/def/gn-part-types/geographicalGivenName> ;
+            # a part with a role
+            schema:value [
+                a cn:CompoundName ;
+                schema:value "Great Keppel"@en ;
+            ] ;
+            schema:roleCode <https://linked.data.gov.au/def/gn-part-types/geographicalGivenName> ;
         ] ;
     skos:historyNote """Derived from the naming of the Keppel Islands by Lieutenant James Cook RN (1728-1779), HM Bark Endeavour, 27 May 1770, after Admiral Augustus Keppel Rn (1725-1786) Viscount Keppel and First Lord of the Admiralty 1782-83. Refer J.C. Beaglehole. The voyage of the Endeavour 1768-1771. Cambridge (UK), 1968, p.328.
 

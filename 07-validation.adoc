@@ -1,3 +1,19 @@
 == Validation
 
-_This section will be completed when Business Rules for Road Labels are determined - etc. June, 2023_
+A https://www.w3.org/TR/shacl/[SHACL] validator is supplied with this model to allow for the testing of conformance claims to it:
+
+* <https://linked.data.gov.au/def/gn/validator>
+
+This validator can be used with a number of SHACL validation tools including:
+
+* https://shacl.org/playground/[SHACL Playground] - online
+* https://shacl-playground.zazuko.com/[Zazuko SHACL Playground] - onlne, v2 of the above
+* https://pypi.org/project/pyshacl[pySHACL] - a Python library for use within code
+* https://tools.kurrawong.ai/validate[KurrawongAI's Online SHACL Validator] - comes with this validator built in
+
+[[NOTE]]
+====
+Data to be validated with this validator _MUST_ include the data of the https://linked.data.gov.au/def/gn-part-types[Geographical Name Part Types] vocabulary as well. This ensures that name parts in data can be confirmed to be included in the vocabulary.
+
+Inclusion can be achieved by merging the vocabulary with data before validation.
+====
